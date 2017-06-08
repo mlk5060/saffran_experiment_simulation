@@ -452,21 +452,21 @@ public class Main {
       DescriptiveStatistics expt2FamiliarWordValues = new DescriptiveStatistics();
       DescriptiveStatistics expt2NovelWordValues = new DescriptiveStatistics();
       
-      for(int repeat = 0; repeat < 50; repeat++){
-        expt1FamiliarWordValues.addValue(data[participantType][0][repeat][0]);
-        expt1NovelWordValues.addValue(data[participantType][0][repeat][2]);
-        expt2FamiliarWordValues.addValue(data[participantType][1][repeat][0]);
-        expt2NovelWordValues.addValue(data[participantType][1][repeat][2]);
+      for(int repeat = 0; repeat < _totalRepeats; repeat++){
+        expt1FamiliarWordValues.addValue(data[participantType][repeat][0][0]);
+        expt1NovelWordValues.addValue(data[participantType][repeat][0][2]);
+        expt2FamiliarWordValues.addValue(data[participantType][repeat][1][0]);
+        expt2NovelWordValues.addValue(data[participantType][repeat][1][2]);
       }
       
       participantTypeExperimentAverageFamiliarNovelValues[participantType][0][0] = expt1FamiliarWordValues.getMean();
-      participantTypeExperimentAverageFamiliarNovelValues[participantType][0][1] = expt1FamiliarWordValues.getStandardDeviation()/(Math.sqrt(50));
+      participantTypeExperimentAverageFamiliarNovelValues[participantType][0][1] = expt1FamiliarWordValues.getStandardDeviation()/(Math.sqrt(_totalRepeats));
       participantTypeExperimentAverageFamiliarNovelValues[participantType][0][2] = expt1NovelWordValues.getMean();
-      participantTypeExperimentAverageFamiliarNovelValues[participantType][0][3] = expt1NovelWordValues.getStandardDeviation()/(Math.sqrt(50));
+      participantTypeExperimentAverageFamiliarNovelValues[participantType][0][3] = expt1NovelWordValues.getStandardDeviation()/(Math.sqrt(_totalRepeats));
       participantTypeExperimentAverageFamiliarNovelValues[participantType][1][0] = expt2FamiliarWordValues.getMean();
-      participantTypeExperimentAverageFamiliarNovelValues[participantType][1][1] = expt2FamiliarWordValues.getStandardDeviation()/(Math.sqrt(50));
+      participantTypeExperimentAverageFamiliarNovelValues[participantType][1][1] = expt2FamiliarWordValues.getStandardDeviation()/(Math.sqrt(_totalRepeats));
       participantTypeExperimentAverageFamiliarNovelValues[participantType][1][2] = expt2NovelWordValues.getMean();
-      participantTypeExperimentAverageFamiliarNovelValues[participantType][1][3] = expt2NovelWordValues.getStandardDeviation()/(Math.sqrt(50));
+      participantTypeExperimentAverageFamiliarNovelValues[participantType][1][3] = expt2NovelWordValues.getStandardDeviation()/(Math.sqrt(_totalRepeats));
     }
     
     return participantTypeExperimentAverageFamiliarNovelValues;
@@ -515,7 +515,7 @@ public class Main {
    */
   private static double[][][] calculateRSquareAndRmseForEachRepeat(double[][][][] data){
     
-    double[][][] rsquareAndRmseValues = new double[_totalParticipants][_totalRepeats][2];
+    double[][][] rsquareAndRmseValues = new double[_totalParticipantTypes][_totalRepeats][2];
     
     for(int participantType = 0; participantType < _totalParticipantTypes; participantType++){
       for(int repeat = 0; repeat < _totalRepeats; repeat++){
@@ -610,9 +610,9 @@ public class Main {
    */
   private static double[][] calculateMeanRsquareAndRmseForEachParticipantType(double[][][] participantTypeRsquareAndRmseForEachRepeat){
     
-    double[][] meanRsquareAndRmseForEachParticipantType = new double[_totalParticipants][2];
+    double[][] meanRsquareAndRmseForEachParticipantType = new double[_totalParticipantTypes][2];
     
-    for(int participantType = 0; participantType < _totalParticipants; participantType++){
+    for(int participantType = 0; participantType < _totalParticipantTypes; participantType++){
       DescriptiveStatistics rsquaresForParticipantType = new DescriptiveStatistics();
       DescriptiveStatistics rmsesForParticipantType = new DescriptiveStatistics();
       
